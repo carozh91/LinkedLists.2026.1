@@ -10,4 +10,10 @@ public interface ILinkedList<T>
     void Reverse();
     void Sort();
     string ToString();
+    void ShowGraph();
+    void RemoveAll(T data);
+
+    void ShowModes();
+
+
 }

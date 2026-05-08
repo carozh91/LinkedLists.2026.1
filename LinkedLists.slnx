@@ -3,4 +3,5 @@
   <Project Path="LinkedLists.Console/LinkedLists.Console.csproj" Id="1317d29d-edbf-4d4e-b081-a4ea5f9f17d6" />
   <Project Path="Shared/Shared.csproj" />
   <Project Path="SimpleList/SimpleList.csproj" Id="b51ca2c5-20c7-46bd-98a1-436a637b9b7b" />
+  <Project Path="Taller05/Taller05.csproj" Id="7c73a4ed-f277-47e0-bdb9-225cd80653e6" />
 </Solution>

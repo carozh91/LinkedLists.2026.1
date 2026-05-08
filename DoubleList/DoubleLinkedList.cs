@@ -174,4 +174,142 @@ public class DoubleLinkedList<T> : ILinkedList<T>
         result += "null";
         return result;
     }
+
+    public void RemoveAll(T data)
+    {
+        var current = _head;
+
+        while (current != null)
+        {
+            var next = current.Next;
+
+            if (current.Data != null && current.Data.Equals(data))
+            {
+                if (current == _head)
+                {
+                    _head = _head.Next;
+
+                    if (_head != null)
+                    {
+                        _head.Previous = null;
+                    }
+                    else
+                    {
+                        _tail = null;
+                    }
+                }
+                else if (current == _tail)
+                {
+                    _tail = _tail.Previous;
+
+                    if (_tail != null)
+                    {
+                        _tail.Next = null;
+                    }
+                }
+                else
+                {
+                    current.Previous!.Next = current.Next;
+                    current.Next!.Previous = current.Previous;
+                }
+            }
+
+            current = next;
+        }
+    }
+
+    public void ShowModes()
+    {
+        if (_head == null)
+        {
+            Console.WriteLine("List is empty.");
+            return;
+        }
+
+        var current = _head;
+        var maxCount = 0;
+        var count = 1;
+        var result = string.Empty;
+
+        while (current.Next != null)
+        {
+            if (current.Data != null &&
+                current.Data.Equals(current.Next.Data))
+            {
+                count++;
+            }
+            else
+            {
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                    result = $"{current.Data}";
+                }
+                else if (count == maxCount)
+                {
+                    result += $" {current.Data}";
+                }
+
+                count = 1;
+            }
+
+            current = current.Next;
+        }
+
+        if (count > maxCount)
+        {
+            result = $"{current.Data}";
+        }
+        else if (count == maxCount)
+        {
+            result += $" {current.Data}";
+        }
+
+        Console.WriteLine($"Mode(s): {result}");
+    }
+
+    public void ShowGraph()
+    {
+        if (_head == null)
+        {
+            Console.WriteLine("List is empty.");
+            return;
+        }
+
+        var current = _head;
+        var count = 1;
+
+        while (current.Next != null)
+        {
+            if (current.Data != null &&
+                current.Data.Equals(current.Next.Data))
+            {
+                count++;
+            }
+            else
+            {
+                Console.Write($"{current.Data} ");
+
+                for (int i = 0; i < count; i++)
+                {
+                    Console.Write("*");
+                }
+
+                Console.WriteLine();
+
+                count = 1;
+            }
+
+            current = current.Next;
+        }
+
+        Console.Write($"{current.Data} ");
+
+        for (int i = 0; i < count; i++)
+        {
+            Console.Write("*");
+        }
+
+        Console.WriteLine();
+    }
 }
