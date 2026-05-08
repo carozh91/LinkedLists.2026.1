@@ -15,7 +15,16 @@ public class DoubleLinkedList<T> : ILinkedList<T>
 
     public bool Contains(T data)
     {
-        throw new NotImplementedException();
+        var current = _head;
+        while (current != null)
+        {
+            if (current.Data != null && current.Data.Equals(data))
+            {
+                return true;
+            }
+            current = current.Next;
+        }
+        return false;
     }
 
     public void InsertAtBeginning(T data)
@@ -52,7 +61,42 @@ public class DoubleLinkedList<T> : ILinkedList<T>
 
     public void InsertOrdered(T data)
     {
-        throw new NotImplementedException();
+        var newNode = new Node<T>(data);
+
+        if (_head == null) 
+        {
+            _head = newNode;
+            _tail = newNode;
+            return;
+        }
+
+        if (Comparer<T>.Default.Compare(data, _head.Data!) < 0) 
+        {
+            newNode.Next = _head;
+            _head.Previous = newNode;
+            _head = newNode;
+            return;
+        }
+
+        var current = _head;
+
+        while (current.Next != null && Comparer<T>.Default.Compare(data, current.Next.Data!) > 0)
+        {
+            current = current.Next;
+        }
+
+        newNode.Next = current.Next;
+        newNode.Previous = current;
+
+        if (current.Next != null)
+        {
+            current.Next.Previous = newNode;
+        }
+        else
+        {
+            _tail = newNode;
+        }
+        current.Next = newNode;
     }
 
     public void Remove(T data)
@@ -85,12 +129,24 @@ public class DoubleLinkedList<T> : ILinkedList<T>
 
     public void Reverse()
     {
-        throw new NotImplementedException();
+        
+        var current = _head;
+        Node<T>? aux = null;
+        while (current != null)
+        {
+            aux = current.Previous;
+            current.Previous = current.Next;
+            current.Next = aux;
+            current = current.Previous;
+        }
+        aux = _head;
+        _head = _tail;
+        _tail = aux;
     }
 
     public void Sort()
     {
-        throw new NotImplementedException();
+        Reverse();
     }
 
     override public string ToString()
