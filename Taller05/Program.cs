@@ -26,7 +26,7 @@ do
 
         case "4":
             list.Sort();
-            Console.WriteLine("List sorted descending.");
+            Console.WriteLine(list.ToString());
             break;
 
         case "5":
@@ -43,11 +43,11 @@ do
 
             if (list.Contains(value))
             {
-                Console.WriteLine($"Value '{value}' exists in the list.");
+                Console.WriteLine($"Value '{value}' found in the list.");
             }
             else
             {
-                Console.WriteLine($"Value '{value}' does not exist in the list.");
+                Console.WriteLine($"Value '{value}' not found in the list.");
             }
             break;
 
@@ -79,14 +79,13 @@ string Menu()
     Console.WriteLine("1. Add");
     Console.WriteLine("2. Show forward");
     Console.WriteLine("3. Show backward");
-    Console.WriteLine("4. Sort descending");
-    Console.WriteLine("5. Show mode(s)");
+    Console.WriteLine("4. Order descending");
+    Console.WriteLine("5. Show mode");
     Console.WriteLine("6. Show graph");
-    Console.WriteLine("7. Exists");
+    Console.WriteLine("7. Contains");
     Console.WriteLine("8. Remove one occurrence");
     Console.WriteLine("9. Remove all occurrences");
     Console.WriteLine("0. Exit");
     Console.Write("Enter your option: ");
-
     return Console.ReadLine() ?? string.Empty;
 }
